@@ -3,35 +3,39 @@ package ru.netology
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import ru.netology.adapter.OnInteractionListener
-import ru.netology.adapter.PostAdapter
-import ru.netology.databinding.ActivityMainBinding
-import ru.netology.dto.Post
+import ru.netology.databinding.MainPageLayoutBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: MainPageLayoutBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = MainPageLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
 
-        val adapter = PostAdapter(object : OnInteractionListener {
-            override fun onLike(post: Post) {
-                viewModel.likeById(post.id)
+        viewModel.data.observe(this) { post ->
+            with(binding) {
+                author.text = post.author
+                dateTextView.text = post.published
+                contentTextView.text = post.content
+                likeCountTextView.text = viewModel.formatCount(post.likeCount)
+                shareCountTextView.text = viewModel.formatCount(post.shareCount)
+                viewCountTextView.text = viewModel.formatCount(post.viewCount)
+                likeImageView.setImageResource(
+                    if (post.liked) R.drawable.baseline_favorite_24_filled
+                    else R.drawable.baseline_favorite_border_24
+                )
             }
+        }
 
-            override fun onShare(post: Post) {
-                viewModel.shareById(post.id)
-            }
-        })
+        binding.likeImageView.setOnClickListener {
+            viewModel.like()
+        }
 
-        binding.list.layoutManager = LinearLayoutManager(this)
-        binding.list.adapter = adapter
-
-        viewModel.data.observe(this) { posts ->
-            adapter.submitList(posts)
+        binding.shareImageView.setOnClickListener {
+            viewModel.share()
         }
     }
 }

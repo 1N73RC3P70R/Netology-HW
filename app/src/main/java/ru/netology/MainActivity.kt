@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.databinding.MainPageLayoutBinding
+import ru.netology.dto.CountFormatter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: MainPageLayoutBinding
@@ -20,9 +21,9 @@ class MainActivity : AppCompatActivity() {
                 author.text = post.author
                 dateTextView.text = post.published
                 contentTextView.text = post.content
-                likeCountTextView.text = viewModel.formatCount(post.likeCount)
-                shareCountTextView.text = viewModel.formatCount(post.shareCount)
-                viewCountTextView.text = viewModel.formatCount(post.viewCount)
+                likeCountTextView.text = CountFormatter.formatCount(post.likeCount)
+                shareCountTextView.text = CountFormatter.formatCount(post.shareCount)
+                viewCountTextView.text = CountFormatter.formatCount(post.viewCount)
                 likeImageView.setImageResource(
                     if (post.liked) R.drawable.baseline_favorite_24_filled
                     else R.drawable.baseline_favorite_border_24

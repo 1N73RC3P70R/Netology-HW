@@ -55,6 +55,8 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.7.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.3")
+    implementation ("androidx.recyclerview:recyclerview:1.2.1")
+
 
     val lifecycleVersion = "2.6.1"
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")

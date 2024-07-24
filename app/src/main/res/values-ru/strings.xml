@@ -2,4 +2,10 @@
 <resources>
     <string name="app_name">НМедиа</string>
     <string name="nmedia">НМедиа!</string>
+    <string name="post_text">Отправить текст</string>
+    <string name="description_post_save">Сохранить пост</string>
+    <string name="description_post_cancel">Отменить редактирование</string>
+    <string name="remove">Удалить</string>
+    <string name="edit">Редактировать</string>
+
 </resources>

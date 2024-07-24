@@ -2,6 +2,7 @@ package ru.netology.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,8 @@ import ru.netology.dto.Post
 interface OnInteractionListener {
     fun onLike(post: Post)
     fun onShare(post: Post)
+    fun onEdit(post: Post)
+    fun onRemove(post: Post)
 }
 
 class PostAdapter(
@@ -44,6 +47,8 @@ class PostViewHolder(
             shareCount.text = CountFormatter.formatCount(post.shareCount)
             viewCount.text = CountFormatter.formatCount(post.viewCount)
 
+            avatar.setImageResource(R.drawable.ic_netology_original)
+
             like.setImageResource(
                 if (post.liked) R.drawable.baseline_favorite_24_filled
                 else R.drawable.baseline_favorite_border_24
@@ -55,6 +60,25 @@ class PostViewHolder(
 
             share.setOnClickListener {
                 onInteractionListener.onShare(post)
+            }
+
+            menu.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.options_post)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.remove -> {
+                                onInteractionListener.onRemove(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                onInteractionListener.onEdit(post)
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                }.show()
             }
         }
     }

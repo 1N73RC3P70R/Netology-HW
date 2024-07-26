@@ -43,21 +43,16 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            likeCount.text = CountFormatter.formatCount(post.likeCount)
-            shareCount.text = CountFormatter.formatCount(post.shareCount)
-            viewCount.text = CountFormatter.formatCount(post.viewCount)
-
             avatar.setImageResource(R.drawable.ic_netology_original)
 
-            like.setImageResource(
-                if (post.liked) R.drawable.baseline_favorite_24_filled
-                else R.drawable.baseline_favorite_border_24
-            )
-
+            like.text = CountFormatter.formatCount(post.likeCount)
+            like.isChecked = post.liked
+            like.setIconResource(if (post.liked) R.drawable.baseline_favorite_24_filled else R.drawable.baseline_favorite_border_24)
             like.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
 
+            share.text = CountFormatter.formatCount(post.shareCount)
             share.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
@@ -80,6 +75,8 @@ class PostViewHolder(
                     }
                 }.show()
             }
+
+            viewCount.text = CountFormatter.formatCount(post.viewCount)
         }
     }
 }

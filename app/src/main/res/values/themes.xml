@@ -1,7 +1,24 @@
 <resources>
-    <style name="Base.Theme.NetologyApp" parent="Theme.Material3.DayNight.NoActionBar">
-
+    <style name="Theme.NetologyApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:padding">0dp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="materialButtonStyle">@style/Widget.App.Button.TextButton.IconOnly</item>
     </style>
 
-    <style name="Theme.NetologyApp" parent="Base.Theme.NetologyApp" />
+    <style name="Widget.App.Button.TextButton.IconOnly" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
 </resources>

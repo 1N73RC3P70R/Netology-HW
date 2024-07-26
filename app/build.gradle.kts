@@ -44,14 +44,11 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.androidx.activity.ktx)
-    implementation (libs.androidx.recyclerview)
+    implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.lifecycle.viewmodel.ktx.v261)
     implementation(libs.androidx.lifecycle.livedata.ktx.v261)
     implementation(libs.androidx.core.ktx.v170)
     implementation(libs.androidx.appcompat.v141)
     implementation(libs.material.v1120)
     implementation(libs.androidx.constraintlayout.v213)
-
-
-
 }

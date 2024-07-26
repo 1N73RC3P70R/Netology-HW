@@ -13,4 +13,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- Custom style for like button -->
+    <style name="LikeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="icon">@drawable/baseline_favorite_border_24</item>
+        <item name="android:textColor">#FF0000</item>
+        <item name="iconTint">#FF0000</item>
+    </style>
 </resources>

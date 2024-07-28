@@ -7,5 +7,7 @@
     <string name="description_post_cancel">Отменить редактирование</string>
     <string name="remove">Удалить</string>
     <string name="edit">Редактировать</string>
+    <string name="add_post">Добавить сообщение</string>
+    <string name="error_empty_content">Содержание не может быть пустым</string>
 
 </resources>

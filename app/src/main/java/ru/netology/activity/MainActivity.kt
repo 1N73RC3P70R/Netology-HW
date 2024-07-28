@@ -1,13 +1,16 @@
-package ru.netology
+package ru.netology.activity
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import ru.netology.PostViewModel
 import ru.netology.adapter.OnInteractionListener
 import ru.netology.adapter.PostAdapter
 import ru.netology.databinding.ActivityMainBinding
 import ru.netology.dto.Post
+import ru.netology.empty
 import ru.netology.util.AndroidUtils
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +20,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
+        val newPostLauncher = registerForActivityResult(NewPostContract){
+            val result = it ?: return@registerForActivityResult
+            viewModel.changeContent(result)
+            viewModel.save()
+        }
+
         val adapter = PostAdapter(object : OnInteractionListener {
             override fun onLike(post: Post) {
                 viewModel.likeById(post.id)
@@ -68,6 +77,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.cancelButton.setOnClickListener {
             viewModel.edit(empty)
+        }
+        binding.save.setOnClickListener(){
+            newPostLauncher.launch()
         }
     }
 }

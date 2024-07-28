@@ -1,6 +1,9 @@
 package ru.netology.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
@@ -77,6 +80,16 @@ class PostViewHolder(
             }
 
             viewCount.text = CountFormatter.formatCount(post.viewCount)
+
+        }
+        if (post.video != null) {
+            binding.videoContainer.visibility = View.VISIBLE
+            binding.videoContainer.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
+                itemView.context.startActivity(intent)
+            }
+        } else {
+            binding.videoContainer.visibility = View.GONE
         }
     }
 }

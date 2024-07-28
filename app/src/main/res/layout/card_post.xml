@@ -116,5 +116,28 @@
             tools:text="500" />
 
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/videoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/content">
+
+<!--        <ImageView-->
+<!--            android:id="@+id/videoThumbnail"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="200dp"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:src="@drawable/video_placeholder" />-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/playButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:src="@drawable/ic_play_button" />-->
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

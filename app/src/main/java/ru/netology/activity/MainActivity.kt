@@ -1,7 +1,6 @@
 package ru.netology.activity
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,8 +9,6 @@ import ru.netology.adapter.OnInteractionListener
 import ru.netology.adapter.PostAdapter
 import ru.netology.databinding.ActivityMainBinding
 import ru.netology.dto.Post
-import ru.netology.empty
-import ru.netology.util.AndroidUtils
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,10 +17,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
-        val newPostLauncher = registerForActivityResult(NewPostContract){
-            val result = it ?: return@registerForActivityResult
-            viewModel.changeContent(result)
-            viewModel.save()
+        val newPostLauncher = registerForActivityResult(NewPostContract) { result ->
+            result?.let {
+                viewModel.changeContent(it)
+                viewModel.save()
+            }
         }
 
         val adapter = PostAdapter(object : OnInteractionListener {
@@ -49,36 +47,7 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(posts)
         }
 
-        viewModel.edited.observe(this) { post ->
-            if (post.id == 0L) {
-                binding.group.visibility = View.GONE
-                binding.content.setText("")
-                binding.content.clearFocus()
-                AndroidUtils.hideKeyboard(binding.content)
-            } else {
-                binding.group.visibility = View.VISIBLE
-                binding.content.setText(post.content)
-                binding.content.requestFocus()
-            }
-        }
-
-        binding.save.setOnClickListener {
-            with(binding.content) {
-                if (text.isNullOrBlank()) {
-                    return@setOnClickListener
-                }
-                viewModel.changeContent(text.toString())
-                viewModel.save()
-                setText("")
-                clearFocus()
-                AndroidUtils.hideKeyboard(this)
-            }
-        }
-
-        binding.cancelButton.setOnClickListener {
-            viewModel.edit(empty)
-        }
-        binding.save.setOnClickListener(){
+        binding.fab.setOnClickListener {
             newPostLauncher.launch()
         }
     }

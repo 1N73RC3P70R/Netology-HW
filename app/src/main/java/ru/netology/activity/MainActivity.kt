@@ -1,12 +1,13 @@
 package ru.netology.activity
 
+import OnInteractionListener
+import PostAdapter
 import android.os.Bundle
 import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.PostViewModel
-import ru.netology.adapter.OnInteractionListener
-import ru.netology.adapter.PostAdapter
+
 import ru.netology.databinding.ActivityMainBinding
 import ru.netology.dto.Post
 

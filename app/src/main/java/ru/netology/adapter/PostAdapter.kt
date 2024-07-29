@@ -1,4 +1,3 @@
-package ru.netology.adapter
 
 import android.content.Intent
 import android.net.Uri
@@ -11,14 +10,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.R
 import ru.netology.databinding.CardPostBinding
-import ru.netology.dto.CountFormatter
 import ru.netology.dto.Post
 
 interface OnInteractionListener {
-    fun onLike(post: Post)
-    fun onShare(post: Post)
-    fun onEdit(post: Post)
-    fun onRemove(post: Post)
+    fun onLike(post: Post) {}
+    fun onShare(post: Post) {}
+    fun onEdit(post: Post) {}
+    fun onRemove(post: Post) {}
+    fun onVideo(post: Post) {}
 }
 
 class PostAdapter(
@@ -46,16 +45,16 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
+            like.text = "${post.likeCount}"
+            like.isChecked = post.liked
+            share.text = "${post.shareCount}"
+            viewCount.text = "${post.viewCount}"
             avatar.setImageResource(R.drawable.ic_netology_original)
 
-            like.text = CountFormatter.formatCount(post.likeCount)
-            like.isChecked = post.liked
-            like.setIconResource(if (post.liked) R.drawable.baseline_favorite_24_filled else R.drawable.baseline_favorite_border_24)
             like.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
 
-            share.text = CountFormatter.formatCount(post.shareCount)
             share.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
@@ -79,17 +78,15 @@ class PostViewHolder(
                 }.show()
             }
 
-            viewCount.text = CountFormatter.formatCount(post.viewCount)
-
-        }
-        if (post.video != null) {
-            binding.videoContainer.visibility = View.VISIBLE
-            binding.videoContainer.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
-                itemView.context.startActivity(intent)
+            if (post.video != null) {
+                videoPreviewContainer.visibility = View.VISIBLE
+                videoPreviewContainer.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
+                    it.context.startActivity(intent)
+                }
+            } else {
+                videoPreviewContainer.visibility = View.GONE
             }
-        } else {
-            binding.videoContainer.visibility = View.GONE
         }
     }
 }

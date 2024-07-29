@@ -3,11 +3,9 @@ package ru.netology.activity
 import OnInteractionListener
 import PostAdapter
 import android.os.Bundle
-import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.PostViewModel
-
 import ru.netology.databinding.ActivityMainBinding
 import ru.netology.dto.Post
 
@@ -21,8 +19,8 @@ class MainActivity : AppCompatActivity() {
         val newPostLauncher = registerForActivityResult(NewPostContract) { result ->
             result?.let {
                 viewModel.changeContent(it)
-                viewModel.save()
             }
+            viewModel.save()
         }
 
         val adapter = PostAdapter(object : OnInteractionListener {
@@ -36,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
+                newPostLauncher.launch(post.content)
             }
 
             override fun onRemove(post: Post) {
@@ -49,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.fab.setOnClickListener {
-            newPostLauncher.launch()
+            newPostLauncher.launch(null)
         }
     }
 }

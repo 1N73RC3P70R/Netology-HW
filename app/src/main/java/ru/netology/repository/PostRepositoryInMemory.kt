@@ -35,11 +35,11 @@ class PostRepositoryInMemoryImpl : PostRepository {
             posts = listOf(
                 post.copy(
                     id = nextId++,
-                    author = "Me",
+                    author = "Нетология.",
                     likeCount = 0,
                     shareCount = 0,
                     viewCount = 0,
-                    published = "now"
+                    published = "Только что"
                 )
             ) + posts
         } else {

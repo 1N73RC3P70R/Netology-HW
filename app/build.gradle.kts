@@ -52,4 +52,6 @@ dependencies {
     implementation(libs.androidx.appcompat.v141)
     implementation(libs.material.v1120)
     implementation(libs.androidx.constraintlayout.v213)
+    implementation (libs.gson)
+
 }

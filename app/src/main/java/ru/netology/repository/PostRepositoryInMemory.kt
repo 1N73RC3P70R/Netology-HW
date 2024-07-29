@@ -24,6 +24,15 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likeCount = 999,
             shareCount = 999,
             viewCount = 999_999
+        ),
+        Post(
+            id = nextId++,
+            author = "Нетология.",
+            content = "https://www.youtube.com/watch?v=eMEH6LG9_iQ",
+            published = "23 мая в 00:00",
+            likeCount = 999,
+            shareCount = 999,
+            viewCount = 999_999
         )
     )
     private val data = MutableLiveData(posts)

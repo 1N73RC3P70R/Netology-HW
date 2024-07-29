@@ -16,11 +16,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
-        val newPostLauncher = registerForActivityResult(NewPostContract) { result ->
+
+        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
             result?.let {
                 viewModel.changeContent(it)
+                viewModel.save()
             }
-            viewModel.save()
         }
 
         val adapter = PostAdapter(object : OnInteractionListener {

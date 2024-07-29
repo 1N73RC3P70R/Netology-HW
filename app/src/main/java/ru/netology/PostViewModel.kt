@@ -1,13 +1,14 @@
 package ru.netology
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import ru.netology.dto.Post
 import ru.netology.repository.PostRepository
-import ru.netology.repository.PostRepositoryInMemoryImpl
+import ru.netology.repository.PostRepositoryFileImpl
 
-val empty = Post(
+private val empty = Post(
     id = 0,
     content = "",
     author = "",
@@ -18,10 +19,10 @@ val empty = Post(
     published = ""
 )
 
-class PostViewModel : ViewModel() {
-    private val repository: PostRepository = PostRepositoryInMemoryImpl()
+class PostViewModel(application: Application) : AndroidViewModel(application) {
+    private val repository: PostRepository = PostRepositoryFileImpl(application)
     val data: LiveData<List<Post>> = repository.getAll()
-    val edited = MutableLiveData(empty)
+    private val edited = MutableLiveData(empty)
 
     fun likeById(id: Long) = repository.likeById(id)
     fun shareById(id: Long) = repository.shareById(id)
